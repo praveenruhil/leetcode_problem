@@ -1,5 +1,44 @@
-//Time Complexity O(n*n)
-//Space Complexity O(1) inspace algorithm
+Approach - Bottom-up
+
+Intuition
+Using bottom-up approach we keep finding the minimum pair from the two rows.
+
+   2
+  3 4
+ 6 5 7 
+4 1 8 3
+
+      Triangle[2][2] = 7 + min(8,3)
+      Triangle[2][1] = 5 + min(1,8)
+      Triangle[2][0] = 6 + min(4,1)
+      
+   2
+  3 4
+ 7 6 10
+4 1 8 3
+
+      Triangle[1][1] = 4 + min(6,10)
+      Triangle[1][0] = 3 + min(7,6)
+   2
+  9 10
+ 7 6 10
+4 1 8 3
+
+     Triangle[0][0] = 2 + min(9,10)
+     
+   11
+  9 10
+ 7 6 10
+4 1 8 3
+
+Return the first element of triangle as final result.
+
+
+Algorithm 
+Time Complexity - O(n*n) 
+
+Space Complexity - O(1) We are modifying the elements in the same table so no extra space is required. It is in-place algorithm.
+
 
 class Solution {
 public:
@@ -7,7 +46,7 @@ public:
     {
         for ( int i = triangle.size() - 2; i>= 0 ; --i ){
             for ( int j = triangle[i].size()-1 ;j>=0; -- j ){
-                //finding minimum sum pair from last 2 rows
+                //finding minimum sum pair
                 triangle[i][j] = triangle[i][j] + min(triangle[i+1][j],triangle[i+1][j+1]);
             }
         }
